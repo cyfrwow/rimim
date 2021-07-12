@@ -116,7 +116,7 @@ function Editor({
 
   const editableProps = {
     placeholder: "Type…",
-    autofocus: true,
+    autoFocus: true,
   };
 
   return (

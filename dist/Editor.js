@@ -125,7 +125,7 @@ function Editor(_ref) {
 
   const editableProps = {
     placeholder: "Type…",
-    autofocus: true
+    autoFocus: true
   };
   return /*#__PURE__*/_react.default.createElement("div", {
     className: "container"
