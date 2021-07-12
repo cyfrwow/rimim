@@ -67,7 +67,7 @@ code {
 }
 .slate-HeadingToolbar ~ div {
   position: absolute !important;
-  top: 175px;
+  top: 90px;
   left: 0;
   text-align: left;
   width: 100%;
