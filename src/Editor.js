@@ -37,29 +37,43 @@ const turndownService = new TurndownService({
     },
   });
 
-function Editor(props) {
+function Editor({
+  initialValue = "",
+  onChange,
+  inputFormat = "html",
+  outputFormat = "markdown",
+}) {
   const id = "slate-plugins-editor";
   const editor = useMemo(
     () => createEditorPlugins({ id, plugins, options, components }),
     []
   );
-  const initialValue = useMemo(() => {
-    return [
-      {
-        children: deserializeHTMLToDocumentFragment(editor, {
-          plugins,
-          element: props.initialValue ?? "<p></p>",
-        }),
-      },
-    ];
-  }, [editor, props.initialValue]);
 
   const [value, setValue] = useState(initialValue);
   const [htmlValue, setHtmlValue] = useState(null);
   const [markdownValue, setMarkdownValue] = useState(null);
 
   useEffect(() => {
-    if (value && editor && props.onChange) {
+    if (inputFormat === "html") {
+      setValue([
+        {
+          children: deserializeHTMLToDocumentFragment(editor, {
+            plugins,
+            element: initialValue,
+          }),
+        },
+      ]);
+    } else {
+      setValue(initialValue);
+    }
+  }, [initialValue]);
+
+  useEffect(() => {
+    if (value) {
+      if (outputFormat === "slate") {
+        onChange && onChange(value);
+        return;
+      }
       const html = serializeHTMLFromNodes(editor, {
         plugins,
         nodes: value,
@@ -69,11 +83,15 @@ function Editor(props) {
   }, [value]);
 
   useEffect(() => {
+    if (htmlValue && outputFormat === "html") {
+      onChange && onChange(htmlValue);
+      return;
+    }
     if (htmlValue) setMarkdownValue(turndownService.turndown(htmlValue));
   }, [htmlValue]);
 
   useEffect(() => {
-    if (markdownValue) props.onChange && props.onChange(markdownValue);
+    if (markdownValue) onChange && onChange(markdownValue);
   }, [markdownValue]);
 
   function handleOnChange(slateObject) {

@@ -46,7 +46,13 @@ const turndownService = new _turndown.default({
   }
 });
 
-function Editor(props) {
+function Editor(_ref) {
+  let {
+    initialValue = "",
+    onChange,
+    inputFormat = "html",
+    outputFormat = "markdown"
+  } = _ref;
   const id = "slate-plugins-editor";
   const editor = (0, _react.useMemo)(() => (0, _slatePlugins.createEditorPlugins)({
     id,
@@ -54,21 +60,28 @@ function Editor(props) {
     options,
     components
   }), []);
-  const initialValue = (0, _react.useMemo)(() => {
-    var _props$initialValue;
-
-    return [{
-      children: (0, _slatePlugins.deserializeHTMLToDocumentFragment)(editor, {
-        plugins: _plugins.default,
-        element: (_props$initialValue = props.initialValue) !== null && _props$initialValue !== void 0 ? _props$initialValue : "<p></p>"
-      })
-    }];
-  }, [editor, props.initialValue]);
   const [value, setValue] = (0, _react.useState)(initialValue);
   const [htmlValue, setHtmlValue] = (0, _react.useState)(null);
   const [markdownValue, setMarkdownValue] = (0, _react.useState)(null);
   (0, _react.useEffect)(() => {
-    if (value && editor && props.onChange) {
+    if (inputFormat === "html") {
+      setValue([{
+        children: (0, _slatePlugins.deserializeHTMLToDocumentFragment)(editor, {
+          plugins: _plugins.default,
+          element: initialValue
+        })
+      }]);
+    } else {
+      setValue(initialValue);
+    }
+  }, [initialValue]);
+  (0, _react.useEffect)(() => {
+    if (value) {
+      if (outputFormat === "slate") {
+        onChange && onChange(value);
+        return;
+      }
+
       const html = (0, _slatePlugins.serializeHTMLFromNodes)(editor, {
         plugins: _plugins.default,
         nodes: value
@@ -77,10 +90,15 @@ function Editor(props) {
     }
   }, [value]);
   (0, _react.useEffect)(() => {
+    if (htmlValue && outputFormat === "html") {
+      onChange && onChange(htmlValue);
+      return;
+    }
+
     if (htmlValue) setMarkdownValue(turndownService.turndown(htmlValue));
   }, [htmlValue]);
   (0, _react.useEffect)(() => {
-    if (markdownValue) props.onChange && props.onChange(markdownValue);
+    if (markdownValue) onChange && onChange(markdownValue);
   }, [markdownValue]);
 
   function handleOnChange(slateObject) {

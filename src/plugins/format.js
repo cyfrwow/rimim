@@ -4,6 +4,7 @@ import {
   createExitBreakPlugin,
   createAutoformatPlugin,
   createTrailingBlockPlugin,
+  createDeserializeMDPlugin,
   ELEMENT_PARAGRAPH,
   ELEMENT_BLOCKQUOTE,
   ELEMENT_CODE_BLOCK,
@@ -230,6 +231,7 @@ const plugins = [
   createExitBreakPlugin(optionsExitBreakPlugin),
   createAutoformatPlugin(optionsAutoformat),
   createTrailingBlockPlugin({ type: ELEMENT_PARAGRAPH }),
+  createDeserializeMDPlugin(),
 ];
 
 export default plugins;

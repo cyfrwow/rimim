@@ -168,6 +168,6 @@ const optionsAutoformat = {
 };
 const plugins = [(0, _slatePlugins.createResetNodePlugin)(optionsResetBlockTypePlugin), (0, _slatePlugins.createSoftBreakPlugin)(optionsSoftBreakPlugin), (0, _slatePlugins.createExitBreakPlugin)(optionsExitBreakPlugin), (0, _slatePlugins.createAutoformatPlugin)(optionsAutoformat), (0, _slatePlugins.createTrailingBlockPlugin)({
   type: _slatePlugins.ELEMENT_PARAGRAPH
-})];
+}), (0, _slatePlugins.createDeserializeMDPlugin)()];
 var _default = plugins;
 exports.default = _default;
