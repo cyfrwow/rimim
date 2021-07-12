@@ -1,5 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useMemo, useEffect } from "react";
-import MonacoEditor from "./MonacoEditor";
+// import MonacoEditor from "./MonacoEditor";
 import {
   SlatePlugins,
   createEditorPlugins,
@@ -39,12 +40,6 @@ const turndownService = new TurndownService({
       return "~~" + content + "~~";
     },
   });
-//   .addRule("codeBlock", {
-//     filter: ["pre"],
-//     replacement: function (content) {
-//       return "```js\n" + content + "\n```";
-//     },
-//   });
 
 function Editor(props) {
   const id = "slate-plugins-editor";
@@ -57,29 +52,33 @@ function Editor(props) {
       {
         children: deserializeHTMLToDocumentFragment(editor, {
           plugins,
-          element: props.initialValue,
+          element: props.initialValue ?? "<p></p>",
         }),
       },
     ];
-  }, [editor]);
+  }, [editor, props.initialValue]);
 
   const [value, setValue] = useState(initialValue);
-  const [htmlValue, setHtmlValue] = useState("");
-  const [markdownValue, setMarkdownValue] = useState("");
+  const [htmlValue, setHtmlValue] = useState(null);
+  const [markdownValue, setMarkdownValue] = useState(null);
 
   useEffect(() => {
-    if (value) {
+    if (value && editor) {
       const html = serializeHTMLFromNodes(editor, {
         plugins,
         nodes: value,
       });
       setHtmlValue(html);
     }
-  }, [value, editor]);
+  }, [value]);
 
   useEffect(() => {
     setMarkdownValue(turndownService.turndown(htmlValue));
   }, [htmlValue]);
+
+  useEffect(() => {
+    if (markdownValue) props.onChange && props.onChange(markdownValue);
+  }, [markdownValue]);
 
   function handleOnChange(slateObject) {
     setValue(slateObject);
@@ -108,12 +107,12 @@ function Editor(props) {
           onChange={(newValue) => handleOnChange(newValue)}
         />
       </div>
-      <div className="column">
+      {/* <div className="column">
         <MonacoEditor slateObject={htmlValue} />
       </div>
       <div className="column">
         <textarea className="textArea" value={markdownValue}></textarea>
-      </div>
+      </div> */}
     </div>
   );
 }
