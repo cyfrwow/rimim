@@ -88,9 +88,7 @@ function Editor(props) {
   };
   return /*#__PURE__*/_react.default.createElement("div", {
     className: "container"
-  }, /*#__PURE__*/_react.default.createElement("div", {
-    className: "column"
-  }, /*#__PURE__*/_react.default.createElement("h4", null, "Slate editor"), /*#__PURE__*/_react.default.createElement(_slatePlugins.HeadingToolbar, null, /*#__PURE__*/_react.default.createElement(_toolbar.default, null)), /*#__PURE__*/_react.default.createElement(_slatePlugins.SlatePlugins, {
+  }, /*#__PURE__*/_react.default.createElement(_slatePlugins.HeadingToolbar, null, /*#__PURE__*/_react.default.createElement(_toolbar.default, null)), /*#__PURE__*/_react.default.createElement(_slatePlugins.SlatePlugins, {
     id: id,
     plugins: _plugins.default,
     components: components,
@@ -99,7 +97,7 @@ function Editor(props) {
     initialValue: value,
     editableProps: editableProps,
     onChange: newValue => handleOnChange(newValue)
-  })));
+  }));
 }
 
 var _default = Editor;
