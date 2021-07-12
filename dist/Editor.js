@@ -60,7 +60,7 @@ function Editor(_ref) {
     options,
     components
   }), []);
-  const [value, setValue] = (0, _react.useState)(initialValue);
+  const [value, setValue] = (0, _react.useState)(null);
   const [htmlValue, setHtmlValue] = (0, _react.useState)(null);
   const [markdownValue, setMarkdownValue] = (0, _react.useState)(null);
   (0, _react.useEffect)(() => {

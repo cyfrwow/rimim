@@ -49,7 +49,7 @@ function Editor({
     []
   );
 
-  const [value, setValue] = useState(initialValue);
+  const [value, setValue] = useState(null);
   const [htmlValue, setHtmlValue] = useState(null);
   const [markdownValue, setMarkdownValue] = useState(null);
 
