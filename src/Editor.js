@@ -29,6 +29,12 @@ const turndownService = new TurndownService({
     replacement: function (content) {
       return "~~" + content + "~~";
     },
+  })
+  .addRule("underline", {
+    filter: ["u"],
+    replacement: function (content) {
+      return "__" + content + "__";
+    },
   });
 
 function Editor(props) {
@@ -89,7 +95,6 @@ function Editor(props) {
         plugins={plugins}
         components={components}
         options={options}
-        autofocus={true}
         initialValue={value}
         editableProps={editableProps}
         onChange={(newValue) => handleOnChange(newValue)}
