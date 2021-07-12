@@ -20,8 +20,7 @@ code {
     monospace;
 }
 .container {
-  width: 100vw;
-  min-height: 100vh;
+  width: 100%;
   display: flex;
   overflow-x: hidden;
 }
@@ -45,10 +44,10 @@ code {
 }
 .toolbar__list {
   padding: 12px;
-  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
   list-style-type: none;
   display: flex;
-  flex-direction: column;
 }
 .toolbar__listitem {
   display: flex;
@@ -63,9 +62,14 @@ code {
 .slate-HeadingToolbar {
   position: absolute;
   margin: 0;
+  width: 100%;
+  padding: 0;
 }
 .slate-HeadingToolbar ~ div {
   position: absolute !important;
-  top: 160px;
+  top: 175px;
+  left: 0;
+  text-align: left;
   width: 100%;
+  padding: 15px;
 }

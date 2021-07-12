@@ -81,22 +81,19 @@ function Editor(props) {
 
   return (
     <div className="container">
-      <div className="column">
-        <h4>Slate editor</h4>
-        <HeadingToolbar>
-          <Toolbar />
-        </HeadingToolbar>
-        <SlatePlugins
-          id={id}
-          plugins={plugins}
-          components={components}
-          options={options}
-          autofocus={true}
-          initialValue={value}
-          editableProps={editableProps}
-          onChange={(newValue) => handleOnChange(newValue)}
-        />
-      </div>
+      <HeadingToolbar>
+        <Toolbar />
+      </HeadingToolbar>
+      <SlatePlugins
+        id={id}
+        plugins={plugins}
+        components={components}
+        options={options}
+        autofocus={true}
+        initialValue={value}
+        editableProps={editableProps}
+        onChange={(newValue) => handleOnChange(newValue)}
+      />
     </div>
   );
 }
