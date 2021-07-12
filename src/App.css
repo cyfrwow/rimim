@@ -1,0 +1,50 @@
+.container {
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  overflow-x: hidden;
+}
+.column {
+  flex: 1;
+  margin-right: 10px;
+  height: 100vh;
+  max-height: 100vh;
+  padding: 10px;
+  position: relative;
+  border-right: 1px solid #ededed;
+}
+.textArea {
+  height: 100% !important;
+  width: 100% !important;
+  border: none;
+}
+.toolbar {
+  display: flex;
+  width: 100%;
+}
+.toolbar__list {
+  padding: 12px;
+  width: 100%;
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+}
+.toolbar__listitem {
+  display: flex;
+}
+.toolbar__button {
+  margin: 0 2px;
+  border-right: 1px solid #ededed;
+}
+.slate-ToolbarButton-active {
+  background-color: #f2f2f2;
+}
+.slate-HeadingToolbar {
+  position: absolute;
+  margin: 0;
+}
+.slate-HeadingToolbar ~ div {
+  position: absolute !important;
+  top: 160px;
+  width: 100%;
+}
