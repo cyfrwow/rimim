@@ -17,6 +17,7 @@ const plugins = [
   createImagePlugin(),
   createTablePlugin(),
   createSelectOnBackspacePlugin({ allow: [ELEMENT_IMAGE] }),
+  createDeserializeMDPlugin(),
 ];
 
 export default plugins;
