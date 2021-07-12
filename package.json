@@ -5,10 +5,7 @@
   "main": "dist/index.js",
   "module": "dist/index.js",
   "sideEffects": false,
-  "files": [
-    "dist",
-    "README.md"
-  ],
+  "private": false,
   "repository": {
     "type": "git",
     "url": "git+https://github.com/cyfrwow/mimir.git"
