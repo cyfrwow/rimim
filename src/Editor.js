@@ -46,7 +46,7 @@ const turndownService = new TurndownService({
 //     },
 //   });
 
-function App() {
+function Editor(props) {
   const id = "slate-plugins-editor";
   const editor = useMemo(
     () => createEditorPlugins({ id, plugins, options, components }),
@@ -57,7 +57,7 @@ function App() {
       {
         children: deserializeHTMLToDocumentFragment(editor, {
           plugins,
-          element: htmlfile,
+          element: props.initialValue,
         }),
       },
     ];
@@ -87,9 +87,7 @@ function App() {
 
   const editableProps = {
     placeholder: "Type…",
-    style: {
-      padding: "15px",
-    },
+    autofocus: true,
   };
 
   return (
@@ -120,4 +118,4 @@ function App() {
   );
 }
 
-export default App;
+export default Editor;
