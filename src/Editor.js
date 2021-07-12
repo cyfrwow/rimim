@@ -76,7 +76,7 @@ function Editor({
           if (err) throw err;
           setValue(slateObject.result);
         });
-    } else {
+    } else if (inputFormat === "slate") {
       setValue(initialValue);
     }
   }, [inputFormat, initialValue]);
