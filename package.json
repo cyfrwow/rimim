@@ -1,27 +1,21 @@
 {
   "name": "pm-mimir",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "license": "MIT",
   "main": "dist/index.js",
   "module": "dist/index.js",
+  "sideEffects": false,
   "files": [
     "dist",
     "README.md"
   ],
   "dependencies": {
-    "-": "^0.0.1",
     "@babel/polyfill": "^7.12.1",
-    "@monaco-editor/react": "^4.2.1",
     "@udecode/slate-plugins": "^1.0.0-next.39",
     "escape-html": "^1.0.3",
-    "node-html-markdown": "^0.1.7",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-scripts": "4.0.3",
-    "react-select": "^4.3.1",
-    "remark-slate": "^1.8.0",
     "slate": "^0.63.0",
-    "slate-edit-list": "^0.12.1",
     "slate-history": "^0.62.0",
     "slate-hyperscript": "^0.62.0",
     "slate-react": "^0.65.2",
@@ -29,10 +23,7 @@
     "turndown-plugin-gfm": "^1.0.2"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "rm -rf dist && NODE_ENV=production babel src/ --out-dir dist --copy-files",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "build": "rm -rf dist && NODE_ENV=production babel src/ --out-dir dist --copy-files"
   },
   "eslintConfig": {
     "extends": [

@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useMemo, useEffect } from "react";
-// import MonacoEditor from "./MonacoEditor";
 import {
   SlatePlugins,
   createEditorPlugins,
@@ -12,21 +11,12 @@ import {
 } from "@udecode/slate-plugins";
 import Toolbar from "./toolbar";
 import plugins from "./plugins";
-// import htmlfile from "./test";
-// import { NodeHtmlMarkdown, NodeHtmlMarkdownOptions } from "node-html-markdown";
 import TurndownService from "turndown";
 import { gfm } from "turndown-plugin-gfm";
 import "./Editor.css";
 
 const components = createSlatePluginsComponents();
 const options = createSlatePluginsOptions();
-
-// const nhm = new NodeHtmlMarkdown(
-//   /* options (optional) */ {
-//     bulletMarker: "-",
-//   },
-//   /* customTransformers (optional) */ undefined
-// );
 
 const turndownService = new TurndownService({
   headingStyle: "atx",
@@ -107,12 +97,6 @@ function Editor(props) {
           onChange={(newValue) => handleOnChange(newValue)}
         />
       </div>
-      {/* <div className="column">
-        <MonacoEditor slateObject={htmlValue} />
-      </div>
-      <div className="column">
-        <textarea className="textArea" value={markdownValue}></textarea>
-      </div> */}
     </div>
   );
 }
