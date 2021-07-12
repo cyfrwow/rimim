@@ -58,31 +58,28 @@ function Editor({
   const [markdownValue, setMarkdownValue] = useState(null);
 
   useEffect(() => {
-    switch (inputFormat) {
-      case "html":
-        setValue([
-          {
-            children: deserializeHTMLToDocumentFragment(editor, {
-              plugins,
-              element: initialValue,
-            }),
-          },
-        ]);
-        break;
-      case "markdown":
-        unified()
-          .use(parse)
-          .use(remarkGFM)
-          .use(slate)
-          .process(initialValue, (err, slateObject) => {
-            if (err) throw err;
-            setValue(slateObject.result);
-          });
-        break;
-      default:
-        setValue(initialValue);
+    if (inputFormat === "html") {
+      setValue([
+        {
+          children: deserializeHTMLToDocumentFragment(editor, {
+            plugins,
+            element: initialValue,
+          }),
+        },
+      ]);
+    } else if (inputFormat === "markdown") {
+      unified()
+        .use(parse)
+        .use(remarkGFM)
+        .use(slate)
+        .process(initialValue, (err, slateObject) => {
+          if (err) throw err;
+          setValue(slateObject.result);
+        });
+    } else {
+      setValue(initialValue);
     }
-  }, [initialValue]);
+  }, [inputFormat, initialValue]);
 
   useEffect(() => {
     if (value) {

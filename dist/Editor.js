@@ -72,27 +72,22 @@ function Editor(_ref) {
   const [htmlValue, setHtmlValue] = (0, _react.useState)(null);
   const [markdownValue, setMarkdownValue] = (0, _react.useState)(null);
   (0, _react.useEffect)(() => {
-    switch (inputFormat) {
-      case "html":
-        setValue([{
-          children: (0, _slatePlugins.deserializeHTMLToDocumentFragment)(editor, {
-            plugins: _plugins.default,
-            element: initialValue
-          })
-        }]);
-        break;
-
-      case "markdown":
-        (0, _unified.default)().use(_remarkParse.default).use(_remarkGfm.default).use(_remarkSlate.default).process(initialValue, (err, slateObject) => {
-          if (err) throw err;
-          setValue(slateObject.result);
-        });
-        break;
-
-      default:
-        setValue(initialValue);
+    if (inputFormat === "html") {
+      setValue([{
+        children: (0, _slatePlugins.deserializeHTMLToDocumentFragment)(editor, {
+          plugins: _plugins.default,
+          element: initialValue
+        })
+      }]);
+    } else if (inputFormat === "markdown") {
+      (0, _unified.default)().use(_remarkParse.default).use(_remarkGfm.default).use(_remarkSlate.default).process(initialValue, (err, slateObject) => {
+        if (err) throw err;
+        setValue(slateObject.result);
+      });
+    } else {
+      setValue(initialValue);
     }
-  }, [initialValue]);
+  }, [inputFormat, initialValue]);
   (0, _react.useEffect)(() => {
     if (value) {
       if (outputFormat === "slate") {
