@@ -53,7 +53,7 @@ function Editor(props) {
   const [markdownValue, setMarkdownValue] = useState(null);
 
   useEffect(() => {
-    if (value && editor) {
+    if (value && editor && props.onChange) {
       const html = serializeHTMLFromNodes(editor, {
         plugins,
         nodes: value,
@@ -63,7 +63,7 @@ function Editor(props) {
   }, [value]);
 
   useEffect(() => {
-    setMarkdownValue(turndownService.turndown(htmlValue));
+    if (htmlValue) setMarkdownValue(turndownService.turndown(htmlValue));
   }, [htmlValue]);
 
   useEffect(() => {
