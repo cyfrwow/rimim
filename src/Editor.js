@@ -38,8 +38,8 @@ const turndownService = new TurndownService({
   });
 
 function Editor({
-  initialValue = "",
   onChange,
+  initialValue = "",
   inputFormat = "html",
   outputFormat = "markdown",
 }) {

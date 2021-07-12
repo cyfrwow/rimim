@@ -8,7 +8,9 @@ Usage:
 import Mimir from 'pm-mimir'
 
 <Mimir
-    initialValue={}
     onChange={}
+    initialValue={}
+    inputFormat={html|markdown|slate}
+    inputFormat={html|markdown|slate}
 >
 ```

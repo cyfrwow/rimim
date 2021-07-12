@@ -48,8 +48,8 @@ const turndownService = new _turndown.default({
 
 function Editor(_ref) {
   let {
-    initialValue = "",
     onChange,
+    initialValue = "",
     inputFormat = "html",
     outputFormat = "markdown"
   } = _ref;
