@@ -6,6 +6,7 @@ import {
   createImagePlugin,
   createTablePlugin,
   createSelectOnBackspacePlugin,
+  createDeserializeMDPlugin,
   ELEMENT_IMAGE,
 } from "@udecode/slate-plugins";
 

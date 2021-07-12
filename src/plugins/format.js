@@ -4,7 +4,6 @@ import {
   createExitBreakPlugin,
   createAutoformatPlugin,
   createTrailingBlockPlugin,
-  createDeserializeMDPlugin,
   ELEMENT_PARAGRAPH,
   ELEMENT_BLOCKQUOTE,
   ELEMENT_CODE_BLOCK,
