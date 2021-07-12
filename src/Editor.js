@@ -11,11 +11,11 @@ import {
 } from "@udecode/slate-plugins";
 import Toolbar from "./toolbar";
 import plugins from "./plugins";
-import htmlfile from "./test";
+// import htmlfile from "./test";
 // import { NodeHtmlMarkdown, NodeHtmlMarkdownOptions } from "node-html-markdown";
 import TurndownService from "turndown";
 import { gfm } from "turndown-plugin-gfm";
-import "./App.css";
+import "./Editor.css";
 
 const components = createSlatePluginsComponents();
 const options = createSlatePluginsOptions();

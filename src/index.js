@@ -1,3 +1,3 @@
 import Editor from "./Editor";
 
-module.exports = <Editor />;
+export default Editor;
