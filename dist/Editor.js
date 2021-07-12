@@ -63,7 +63,7 @@ function Editor(props) {
   const [htmlValue, setHtmlValue] = (0, _react.useState)(null);
   const [markdownValue, setMarkdownValue] = (0, _react.useState)(null);
   (0, _react.useEffect)(() => {
-    if (value && editor) {
+    if (value && editor && props.onChange) {
       const html = (0, _slatePlugins.serializeHTMLFromNodes)(editor, {
         plugins: _plugins.default,
         nodes: value
@@ -72,7 +72,7 @@ function Editor(props) {
     }
   }, [value]);
   (0, _react.useEffect)(() => {
-    setMarkdownValue(turndownService.turndown(htmlValue));
+    if (htmlValue) setMarkdownValue(turndownService.turndown(htmlValue));
   }, [htmlValue]);
   (0, _react.useEffect)(() => {
     if (markdownValue) props.onChange && props.onChange(markdownValue);
