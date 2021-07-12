@@ -1,6 +1,6 @@
 {
   "name": "pm-mimir",
-  "version": "0.1.18",
+  "version": "0.1.19",
   "license": "MIT",
   "main": "dist/index.js",
   "module": "dist/index.js",
@@ -16,12 +16,16 @@
     "escape-html": "^1.0.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "remark-gfm": "^1.0.0",
+    "remark-parse": "^9.0.0",
+    "remark-slate": "^1.8.0",
     "slate": "^0.63.0",
     "slate-history": "^0.62.0",
     "slate-hyperscript": "^0.62.0",
     "slate-react": "^0.65.2",
     "turndown": "^7.1.1",
-    "turndown-plugin-gfm": "^1.0.2"
+    "turndown-plugin-gfm": "^1.0.2",
+    "unified": "^9.2.1"
   },
   "scripts": {
     "build": "rm -rf dist && NODE_ENV=production babel src/ --out-dir dist --copy-files"

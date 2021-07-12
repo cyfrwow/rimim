@@ -19,6 +19,14 @@ var _turndown = _interopRequireDefault(require("turndown"));
 
 var _turndownPluginGfm = require("turndown-plugin-gfm");
 
+var _remarkGfm = _interopRequireDefault(require("remark-gfm"));
+
+var _unified = _interopRequireDefault(require("unified"));
+
+var _remarkParse = _interopRequireDefault(require("remark-parse"));
+
+var _remarkSlate = _interopRequireDefault(require("remark-slate"));
+
 require("./Editor.css");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -64,15 +72,25 @@ function Editor(_ref) {
   const [htmlValue, setHtmlValue] = (0, _react.useState)(null);
   const [markdownValue, setMarkdownValue] = (0, _react.useState)(null);
   (0, _react.useEffect)(() => {
-    if (inputFormat === "html") {
-      setValue([{
-        children: (0, _slatePlugins.deserializeHTMLToDocumentFragment)(editor, {
-          plugins: _plugins.default,
-          element: initialValue
-        })
-      }]);
-    } else {
-      setValue(initialValue);
+    switch (inputFormat) {
+      case "html":
+        setValue([{
+          children: (0, _slatePlugins.deserializeHTMLToDocumentFragment)(editor, {
+            plugins: _plugins.default,
+            element: initialValue
+          })
+        }]);
+        break;
+
+      case "markdown":
+        (0, _unified.default)().use(_remarkParse.default).use(_remarkGfm.default).use(_remarkSlate.default).process(initialValue, (err, slateObject) => {
+          if (err) throw err;
+          setValue(slateObject.result);
+        });
+        break;
+
+      default:
+        setValue(initialValue);
     }
   }, [initialValue]);
   (0, _react.useEffect)(() => {

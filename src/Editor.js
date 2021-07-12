@@ -13,6 +13,10 @@ import Toolbar from "./toolbar";
 import plugins from "./plugins";
 import TurndownService from "turndown";
 import { gfm } from "turndown-plugin-gfm";
+import remarkGFM from "remark-gfm";
+import unified from "unified";
+import parse from "remark-parse";
+import slate from "remark-slate";
 import "./Editor.css";
 
 const components = createSlatePluginsComponents();
@@ -54,17 +58,29 @@ function Editor({
   const [markdownValue, setMarkdownValue] = useState(null);
 
   useEffect(() => {
-    if (inputFormat === "html") {
-      setValue([
-        {
-          children: deserializeHTMLToDocumentFragment(editor, {
-            plugins,
-            element: initialValue,
-          }),
-        },
-      ]);
-    } else {
-      setValue(initialValue);
+    switch (inputFormat) {
+      case "html":
+        setValue([
+          {
+            children: deserializeHTMLToDocumentFragment(editor, {
+              plugins,
+              element: initialValue,
+            }),
+          },
+        ]);
+        break;
+      case "markdown":
+        unified()
+          .use(parse)
+          .use(remarkGFM)
+          .use(slate)
+          .process(initialValue, (err, slateObject) => {
+            if (err) throw err;
+            setValue(slateObject.result);
+          });
+        break;
+      default:
+        setValue(initialValue);
     }
   }, [initialValue]);
 
