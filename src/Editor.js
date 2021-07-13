@@ -8,15 +8,12 @@ import {
   createSlatePluginsComponents,
   createSlatePluginsOptions,
   deserializeHTMLToDocumentFragment,
+  deserializeMD,
 } from "@udecode/slate-plugins";
 import Toolbar from "./toolbar";
 import plugins from "./plugins";
 import TurndownService from "turndown";
 import { gfm } from "turndown-plugin-gfm";
-import remarkGFM from "remark-gfm";
-import unified from "unified";
-import parse from "remark-parse";
-import slate from "remark-slate";
 import "./Editor.css";
 
 const components = createSlatePluginsComponents();
@@ -53,12 +50,14 @@ function Editor({
     []
   );
 
-  const [value, setValue] = useState(null);
+  const [value, setValue] = useState("");
   const [htmlValue, setHtmlValue] = useState(null);
   const [markdownValue, setMarkdownValue] = useState(null);
 
   useEffect(() => {
+    console.log(inputFormat, initialValue);
     if (inputFormat === "html") {
+      console.log("in html");
       setValue([
         {
           children: deserializeHTMLToDocumentFragment(editor, {
@@ -68,14 +67,7 @@ function Editor({
         },
       ]);
     } else if (inputFormat === "markdown") {
-      unified()
-        .use(parse)
-        .use(remarkGFM)
-        .use(slate)
-        .process(initialValue, (err, slateObject) => {
-          if (err) throw err;
-          setValue(slateObject.result);
-        });
+      setValue(deserializeMD(editor, initialValue));
     } else if (inputFormat === "slate") {
       setValue(initialValue);
     }
@@ -126,7 +118,7 @@ function Editor({
         plugins={plugins}
         components={components}
         options={options}
-        initialValue={value}
+        value={value}
         editableProps={editableProps}
         onChange={(newValue) => handleOnChange(newValue)}
       />
