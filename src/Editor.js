@@ -2,7 +2,7 @@
 import React, { useState, useMemo, useEffect, useCallback } from 'react';
 import {
     SlatePlugins,
-    createEditorPlugins,
+    // createEditorPlugins,
     // serializeHTMLFromNodes,
     HeadingToolbar,
     createSlatePluginsComponents,
@@ -24,8 +24,11 @@ import { useComboboxIsOpen } from './combobox/selectors/useComboboxIsOpen';
 import { useComboboxStore } from './combobox/useComboboxStore';
 import { TagCombobox } from './tag/components/TagCombobox';
 import { TagElement } from './tag/components/TagElement';
+import { ThematicBreakElement } from './hr/components/ThematicBreakElement';
 import { createTagPlugin } from './tag/createTagPlugin';
+import { createThematicBreakPlugin } from './hr/createThematicBreakPlugin';
 import { ELEMENT_TAG } from './tag/defaults';
+import { ELEMENT_HR } from './hr/defaults';
 import { useTagOnChange } from './tag/hooks/useTagOnChange';
 import { useTagOnSelectItem } from './tag/hooks/useTagOnSelectItem';
 import './Editor.css';
@@ -33,6 +36,7 @@ import './Editor.css';
 const id = 'slate-plugins-editor';
 const components = createSlatePluginsComponents({
     [ELEMENT_TAG]: TagElement,
+    [ELEMENT_HR]: ThematicBreakElement,
 });
 const options = createSlatePluginsOptions();
 
@@ -104,6 +108,7 @@ function Editor({
         () => [
             ..._plugins,
             createTagPlugin(),
+            createThematicBreakPlugin(),
             {
                 onChange: comboboxOnChange,
                 onKeyDown: comboboxOnKeyDown,
@@ -111,10 +116,10 @@ function Editor({
         ],
         [comboboxOnChange, comboboxOnKeyDown]
     );
-    const editor = useMemo(
-        () => createEditorPlugins({ id, plugins, options, components }),
-        []
-    );
+    // const editor = useMemo(
+    //     () => createEditorPlugins({ id, plugins, options, components }),
+    //     []
+    // );
 
     const [value, setValue] = useState('');
     // const [htmlValue, setHtmlValue] = useState(null);
