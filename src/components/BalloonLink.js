@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useRef, useState, useEffect } from 'react';
+import { MdDelete as DeleteIcon, MdModeEdit as EditIcon } from 'react-icons/md'
 import {
     useStoreEditorState,
     useEventEditorId,
@@ -164,10 +165,14 @@ const BalloonLink = () => {
                             className='link__button'
                             onClick={() => setIsEditMode(true)}
                         >
-                            edit
+                            <EditIcon style={{
+                                fontSize: '18px'
+                            }} />
                         </span>
                         <span className='link__button' onClick={removeLink}>
-                            del
+                            <DeleteIcon style={{
+                                fontSize: '18px'
+                            }} />
                         </span>
                     </>
                 )}
