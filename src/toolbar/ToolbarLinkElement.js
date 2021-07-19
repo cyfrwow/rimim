@@ -1,5 +1,7 @@
-import React from "react";
-import { ToolbarLink } from "@udecode/slate-plugins";
+import React from 'react';
+import { BsLink45Deg as LinkIcon } from 'react-icons/bs';
+import { ToolbarLink } from '../toolbar-custom/ToolbarLink';
+
 export const ToolbarLinkElement = () => {
-  return <ToolbarLink icon={"A"} />;
+    return <ToolbarLink icon={<LinkIcon />} />;
 };

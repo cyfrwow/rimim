@@ -1,17 +1,27 @@
 import Editor from './Editor';
 
+const initialValue = [
+    {
+        type: 'p',
+        children: [
+            {
+                text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur, eius. Omnis possimus quia maxime vero, sint iusto et illo accusamus!',
+            },
+        ],
+    },
+];
+
 function App() {
     const handleChange = (value) => {
-        console.log(value);
     };
 
     return (
         <div className='App'>
             <Editor
-                initialValue={'sadasd'}
+                initialValue={initialValue}
                 onChange={handleChange}
-                inputFormat={'markdown'}
-                outputFormat={'markdown'}
+                inputFormat={'slate'}
+                outputFormat={'slate'}
             />
         </div>
     );
