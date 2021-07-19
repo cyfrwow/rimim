@@ -1,0 +1,40 @@
+.link__container {
+    position: fixed;
+    width: 300px;
+    height: 32px;
+    display: none;
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    background: #fff;
+    z-index: 1;
+    padding: 4px;
+    margin-top: 24px;
+    margin-left: -40px;
+    transition: 'top 75ms ease-out,left 75ms ease-out';
+}
+.link__input {
+    width: 240px;
+    height: 24px;
+    background: #f9f9f9;
+    border: 1px solid #ededed;
+    border-radius: 4px;
+    padding: 3px 8px;
+    margin-right: 4px;
+}
+.link__input::placeholder {
+    color: #a6a6a6;
+}
+.link__button {
+    color: #0053b8;
+    height: 24px;
+    width: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    line-height: 18px;
+    cursor: pointer;
+}
+.show {
+    display: flex;
+}

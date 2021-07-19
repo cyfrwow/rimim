@@ -1,69 +1,46 @@
-var slatePluginsCommon = require('@udecode/slate-plugins-common');
-var slatePluginsCore = require('@udecode/slate-plugins-core');
-var slatePluginsLink = require('@udecode/slate-plugins-link');
-var slatePluginsToolbar = require('@udecode/slate-plugins-toolbar');
+import {
+    ToolbarButton,
+    ELEMENT_LINK,
+    someNode,
+    useStoreEditorState,
+    useEventEditorId,
+    getSlatePluginType,
+    getSelectionText,
+} from '@udecode/slate-plugins';
+import { useEditorStore } from '../store/editorStore';
+
 export const ToolbarLink = ({ getLinkUrl, ...props }) => {
-    const editor = slatePluginsCore.useStoreEditorState(
-        slatePluginsCore.useEventEditorId('focus')
+    const editor = useStoreEditorState(useEventEditorId('focus'));
+    const type = getSlatePluginType(editor, ELEMENT_LINK);
+    const isLinkOpen = useEditorStore((state) => state.isLinkOpen);
+    const setIsLinkOpen = useEditorStore((state) => state.setIsLinkOpen);
+    const setEditorSelection = useEditorStore(
+        (state) => state.setEditorSelection
     );
-    const type = slatePluginsCore.getSlatePluginType(
-        editor,
-        slatePluginsLink.ELEMENT_LINK
+    const setEditorSelectionText = useEditorStore(
+        (state) => state.setEditorSelectionText
     );
+
     const isLink =
         !!(editor !== null && editor !== void 0 && editor.selection) &&
-        slatePluginsCommon.someNode(editor, {
+        someNode(editor, {
             match: {
                 type,
             },
         });
+
     return (
-        <slatePluginsToolbar.ToolbarButton
+        <ToolbarButton
             active={isLink}
             onMouseDown={async (event) => {
                 if (!editor) return;
                 event.preventDefault();
-                let prevUrl = '';
-                const linkNode = slatePluginsCommon.getAbove(editor, {
-                    match: {
-                        type,
-                    },
-                });
-
-                if (linkNode) {
-                    prevUrl = linkNode[0].url;
-                }
-
-                let url;
-
-                if (getLinkUrl) {
-                    url = await getLinkUrl(prevUrl);
-                } else {
-                    url = window.prompt(`Enter the URL of the link:`, prevUrl);
-                }
-
-                if (!url) {
-                    linkNode &&
-                        editor.selection &&
-                        slatePluginsCommon.unwrapNodes(editor, {
-                            at: editor.selection,
-                            match: {
-                                type: slatePluginsCore.getSlatePluginType(
-                                    editor,
-                                    slatePluginsLink.ELEMENT_LINK
-                                ),
-                            },
-                        });
-                    return;
-                } // If our cursor is in middle of a link, then we don't want to inser it inline
-
-                const shouldWrap =
-                    linkNode !== undefined &&
-                    slatePluginsCommon.isCollapsed(editor.selection);
-                slatePluginsLink.upsertLinkAtSelection(editor, {
-                    url,
-                    wrap: shouldWrap,
-                });
+                //toggle ballon link component
+                setIsLinkOpen(!isLinkOpen);
+                //get selection text from editor
+                setEditorSelectionText(getSelectionText(editor));
+                //get selection position
+                setEditorSelection(editor.selection);
             }}
             {...props}
         />

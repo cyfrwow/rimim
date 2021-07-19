@@ -11,7 +11,7 @@ function App() {
                 initialValue={'sadasd'}
                 onChange={handleChange}
                 inputFormat={'markdown'}
-                outputFormat={'markdown'}
+                outputFormat={'slate'}
             />
         </div>
     );

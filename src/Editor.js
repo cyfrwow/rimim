@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState, useMemo, useEffect, useCallback } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import {
     SlatePlugins,
     // createEditorPlugins,
@@ -9,7 +9,7 @@ import {
     createSlatePluginsOptions,
     // deserializeHTMLToDocumentFragment,
     // deserializeMD,
-    useStoreEditorRef,
+    // useStoreEditorRef,
 } from '@udecode/slate-plugins';
 import Toolbar from './toolbar';
 import _plugins from './plugins';
@@ -17,20 +17,21 @@ import _plugins from './plugins';
 // import { gfm } from 'turndown-plugin-gfm';
 // import { editableProps } from './config/pluginOptions';
 import { initialValueCombobox } from './config/initialValues';
-import { MENTIONABLES } from './config/mentionables';
-import { useComboboxControls } from './combobox/hooks/useComboboxControls';
-import { useComboboxOnKeyDown } from './combobox/hooks/useComboboxOnKeyDown';
-import { useComboboxIsOpen } from './combobox/selectors/useComboboxIsOpen';
-import { useComboboxStore } from './combobox/useComboboxStore';
-import { TagCombobox } from './tag/components/TagCombobox';
+// import { MENTIONABLES } from './config/mentionables';
+// import { useComboboxControls } from './combobox/hooks/useComboboxControls';
+// import { useComboboxOnKeyDown } from './combobox/hooks/useComboboxOnKeyDown';
+// import { useComboboxIsOpen } from './combobox/selectors/useComboboxIsOpen';
+// import { useComboboxStore } from './combobox/useComboboxStore';
+// import { TagCombobox } from './tag/components/TagCombobox';
 import { TagElement } from './tag/components/TagElement';
 import { ThematicBreakElement } from './hr/components/ThematicBreakElement';
-import { createTagPlugin } from './tag/createTagPlugin';
+// import { createTagPlugin } from './tag/createTagPlugin';
 import { createThematicBreakPlugin } from './hr/createThematicBreakPlugin';
 import { ELEMENT_TAG } from './tag/defaults';
 import { ELEMENT_HR } from './hr/defaults';
-import { useTagOnChange } from './tag/hooks/useTagOnChange';
-import { useTagOnSelectItem } from './tag/hooks/useTagOnSelectItem';
+// import { useTagOnChange } from './tag/hooks/useTagOnChange';
+// import { useTagOnSelectItem } from './tag/hooks/useTagOnSelectItem';
+import { BalloonLink } from './components';
 import './Editor.css';
 
 const id = 'slate-plugins-editor';
@@ -60,34 +61,34 @@ const options = createSlatePluginsOptions();
 //     });
 
 // Handle multiple combobox
-const useComboboxOnChange = () => {
-    const editor = useStoreEditorRef(id);
+// const useComboboxOnChange = () => {
+//     const editor = useStoreEditorRef(id);
 
-    const tagOnChange = useTagOnChange(editor, MENTIONABLES);
-    const isOpen = useComboboxIsOpen();
-    const closeMenu = useComboboxStore((state) => state.closeMenu);
+//     const tagOnChange = useTagOnChange(editor, MENTIONABLES);
+//     const isOpen = useComboboxIsOpen();
+//     const closeMenu = useComboboxStore((state) => state.closeMenu);
 
-    return useCallback(
-        () => () => {
-            let changed = false;
-            changed = tagOnChange();
+//     return useCallback(
+//         () => () => {
+//             let changed = false;
+//             changed = tagOnChange();
 
-            if (changed) return;
+//             if (changed) return;
 
-            if (!changed && isOpen) {
-                closeMenu();
-            }
-        },
-        [closeMenu, isOpen, tagOnChange]
-    );
-};
+//             if (!changed && isOpen) {
+//                 closeMenu();
+//             }
+//         },
+//         [closeMenu, isOpen, tagOnChange]
+//     );
+// };
 
 // Handle multiple combobox
-const ComboboxContainer = () => {
-    useComboboxControls();
+// const ComboboxContainer = () => {
+//     useComboboxControls();
 
-    return <TagCombobox />;
-};
+//     return <TagCombobox />;
+// };
 
 function Editor({
     onChange,
@@ -95,27 +96,20 @@ function Editor({
     // inputFormat = 'html',
     outputFormat = 'slate',
 }) {
-    const comboboxOnChange = useComboboxOnChange();
+    // const comboboxOnChange = useComboboxOnChange();
 
-    const tagOnSelect = useTagOnSelectItem();
+    // const tagOnSelect = useTagOnSelectItem();
 
     // Handle multiple combobox
-    const comboboxOnKeyDown = useComboboxOnKeyDown({
-        onSelectItem: tagOnSelect,
-    });
+    // const comboboxOnKeyDown = useComboboxOnKeyDown({
+    //     onSelectItem: tagOnSelect,
+    // });
 
     const plugins = useMemo(
-        () => [
-            ..._plugins,
-            createTagPlugin(),
-            createThematicBreakPlugin(),
-            {
-                onChange: comboboxOnChange,
-                onKeyDown: comboboxOnKeyDown,
-            },
-        ],
-        [comboboxOnChange, comboboxOnKeyDown]
+        () => [..._plugins, createThematicBreakPlugin()],
+        []
     );
+
     // const editor = useMemo(
     //     () => createEditorPlugins({ id, plugins, options, components }),
     //     []
@@ -184,6 +178,7 @@ function Editor({
             <HeadingToolbar>
                 <Toolbar />
             </HeadingToolbar>
+            <BalloonLink />
             <SlatePlugins
                 id={id}
                 plugins={plugins}
@@ -193,7 +188,7 @@ function Editor({
                 editableProps={editableProps}
                 onChange={(newValue) => handleOnChange(newValue)}
             >
-                <ComboboxContainer />
+                {/* <ComboboxContainer /> */}
             </SlatePlugins>
         </div>
     );
