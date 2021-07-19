@@ -13,7 +13,6 @@ const initialValue = [
 
 function App() {
     const handleChange = (value) => {
-        console.log(value);
     };
 
     return (

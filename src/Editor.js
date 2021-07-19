@@ -17,7 +17,7 @@ import { gfm } from 'turndown-plugin-gfm';
 import { ThematicBreakElement } from './hr/components/ThematicBreakElement';
 import { createThematicBreakPlugin } from './hr/createThematicBreakPlugin';
 import { ELEMENT_HR } from './hr/defaults';
-import { BalloonLink } from './components';
+import { BalloonLink, BalloonImage } from './components';
 import './Editor.css';
 
 const id = 'slate-plugins-editor';
@@ -131,6 +131,7 @@ function Editor({
                 <Toolbar />
             </HeadingToolbar>
             <BalloonLink />
+            <BalloonImage />
             <SlatePlugins
                 id={id}
                 plugins={plugins}
