@@ -2,7 +2,6 @@ import {
     useStoreEditorRef,
     useEventEditorId,
     ToolbarButton,
-    getSelectionText
 } from '@udecode/slate-plugins';
 import { useEditorStore } from '../store/editorStore';
 
@@ -11,9 +10,7 @@ const ToolbarImage = ({ getImageUrl, ...props }) => {
     const setEditorSelection = useEditorStore(
         (state) => state.setEditorSelection
     );
-    const setEditorSelectionText = useEditorStore(
-        (state) => state.setEditorSelectionText
-    );
+
     const isImageOpen = useEditorStore((state) => state.isImageOpen);
     const setIsImageOpen = useEditorStore((state) => state.setIsImageOpen);
 
