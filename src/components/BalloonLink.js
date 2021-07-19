@@ -1,9 +1,9 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useRef, useState, useEffect } from 'react';
 import {
     useStoreEditorState,
     useEventEditorId,
     PortalBody,
-    someNode,
     setPositionAtSelection,
     ELEMENT_LINK,
     getAbove,
@@ -33,22 +33,23 @@ const BalloonLink = () => {
         setShow((prevState) => isLinkOpen);
     }, [isLinkOpen]);
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(() => {
-        if (!editor) return;
+        // console.log(show, editor?.selection);
+        if (!editor || show || !editor.selection) return;
         //to check if selection on editor is a link
+
+        // if (show && !editor.selection) return;
         const active =
             editor !== null &&
             editor !== void 0 &&
             editor.selection &&
-            someNode(editor, {
+            getAbove(editor, {
                 match: {
                     type: ELEMENT_LINK,
                 },
             });
-
-        console.log(active);
-        if (show && !editor.selection) return;
+        if (!active) return;
+        // console.log(editor.selection);
         if (active && !show) {
             //get parent of the selection
             const linkNode = getAbove(editor, {
@@ -64,27 +65,28 @@ const BalloonLink = () => {
             Transforms.move(editor, {
                 distance: 1,
                 unit: 'word',
+                edge: 'start',
             });
-            //select the entire word - WIP
+            //select the entire word
             Transforms.select(editor, {
                 anchor: {
-                    path: [0, 1, 0],
+                    path: editor.selection.anchor.path,
                     offset: 0,
                 },
                 focus: {
-                    path: [0, 1, 0],
-                    offset: editor.selection.focus.offset,
+                    path: editor.selection.focus.path,
+                    offset: editor.selection.anchor.offset,
                 },
             });
             //save the selection
             setSelection({
                 anchor: {
-                    path: [0, 1, 0],
+                    path: editor.selection.anchor.path,
                     offset: 0,
                 },
                 focus: {
-                    path: [0, 1, 0],
-                    offset: editor.selection.focus.offset,
+                    path: editor.selection.focus.path,
+                    offset: editor.selection.anchor.offset,
                 },
             });
             //move the ref component to the selection point
@@ -92,7 +94,7 @@ const BalloonLink = () => {
             //show the link component
             setIsLinkOpen(true);
         }
-    });
+    }, [editor?.selection]);
 
     const handleClick = async (event) => {
         if (!editor) return;
@@ -104,12 +106,18 @@ const BalloonLink = () => {
             url: value,
             wrap: true,
         });
+        handleClose();
+    };
+
+    const handleClose = () => {
         //close the link component
         setIsLinkOpen(false);
         //reset store value
         setEditorSelection(null);
         //reset local state
         setValue('');
+        setShow(false);
+        setSelection(null);
     };
     return (
         <PortalBody>
@@ -127,7 +135,7 @@ const BalloonLink = () => {
                 <span className='link__button' onClick={(e) => handleClick(e)}>
                     add
                 </span>
-                <span className='link__button' onClick={() => setShow(false)}>
+                <span className='link__button' onClick={handleClose}>
                     X
                 </span>
             </div>
