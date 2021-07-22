@@ -34,7 +34,7 @@ const BalloonLink = () => {
     useEffect(() => {
         // console.log(isLinkOpen, editorSelection);
         setShow((prevState) => isLinkOpen);
-        setPositionAtSelection(ref.current, 'top');
+        setPositionAtSelection(ref.current);
     }, [isLinkOpen]);
 
     useEffect(() => {
@@ -43,16 +43,13 @@ const BalloonLink = () => {
             return;
         }
         //to check if selection on editor is a link
-        const active =
-            editor !== null &&
-            editor !== void 0 &&
-            editor.selection &&
-            getAbove(editor, {
-                match: {
-                    type: ELEMENT_LINK,
-                },
-            });
-        if (!active) {
+        const active = getAbove(editor, {
+            match: {
+                type: ELEMENT_LINK,
+            },
+        });
+        if (!active && !isLinkOpen) {
+            console.log('not active', isLinkOpen);
             handleClose();
             return;
         }
@@ -89,9 +86,9 @@ const BalloonLink = () => {
             //save the selection
             setSelection(editor.selection);
             //move the ref component to the selection point
-            setPositionAtSelection(ref.current, 'top');
+            setPositionAtSelection(ref.current);
             //show the link component
-            setIsLinkOpen(true);
+            setShow(true);
         }
     });
 
@@ -106,6 +103,11 @@ const BalloonLink = () => {
             wrap: true,
         });
         handleClose();
+        Transforms.move(editor, {
+            distance: 1,
+            unit: 'offset',
+            edge: 'start',
+        });
     };
 
     const handleClose = () => {
@@ -191,6 +193,13 @@ const BalloonLink = () => {
                                     fontSize: '18px',
                                 }}
                             />
+                        </span>
+                        <span
+                            data-testid='link__button-close'
+                            className='link__button'
+                            onClick={handleClose}
+                        >
+                            X
                         </span>
                     </>
                 )}

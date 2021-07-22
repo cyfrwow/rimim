@@ -1,22 +1,20 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useRef, useState, useEffect } from 'react';
-import { MdDelete as DeleteIcon } from 'react-icons/md'
+import { MdDelete as DeleteIcon } from 'react-icons/md';
 import {
     useStoreEditorState,
     useEventEditorId,
     PortalBody,
     ELEMENT_IMAGE,
-    insertImage,
     getSlatePluginType,
     insertNodes,
     setPositionAtSelection,
-    ELEMENT_IMAGE,
-    getAbove
+    getAbove,
 } from '@udecode/slate-plugins';
 import cx from 'classnames';
 import { Transforms } from 'slate';
 import { useEditorStore } from '../store/editorStore';
-import './BalloonLink.css';
+import './BalloonImage.css';
 
 const BalloonImage = () => {
     const ref = useRef(null);
@@ -38,7 +36,7 @@ const BalloonImage = () => {
 
     useEffect(() => {
         setIsEditMode(true);
-        setShow(isImageOpen)
+        setShow(isImageOpen);
     }, [isImageOpen]);
 
     useEffect(() => {
@@ -63,14 +61,16 @@ const BalloonImage = () => {
     }, [show, isImageOpen]);
 
     useEffect(() => {
-        const imageNode = editor?.selection && getAbove(editor, {
-            match: {
-                type: ELEMENT_IMAGE,
-            },
-        });
+        const imageNode =
+            editor?.selection &&
+            getAbove(editor, {
+                match: {
+                    type: ELEMENT_IMAGE,
+                },
+            });
 
         if (!!imageNode) {
-            const { url } = imageNode[0]
+            const { url } = imageNode[0];
             setValue(url);
             setIsEditMode(false);
 
@@ -86,11 +86,10 @@ const BalloonImage = () => {
             setPositionAtSelection(ref.current);
             //show the image component
             setShow(true);
+        } else {
+            if (!isImageOpen && show) setShow(false);
         }
-        else {
-            if (!isImageOpen && show) setShow(false)
-        }
-    }, [editor?.selection])
+    }, [editor?.selection]);
 
     const handleAdd = async (event) => {
         if (!editor) return;
@@ -157,54 +156,68 @@ const BalloonImage = () => {
     return (
         <PortalBody>
             <div
-                className={cx('link__container', show ? 'show' : '')}
+                className={cx('image__container', show ? 'show' : '')}
                 ref={ref}
-                style={show && !isImageOpen ? {
-                    transform: 'translateX(100%) translateY(50%)',
-                    marginTop: '0px'
-                } : {}}
+                style={
+                    show && !isImageOpen
+                        ? {
+                              transform: 'translateX(100%) translateY(50%)',
+                              marginTop: '0px',
+                          }
+                        : {}
+                }
             >
-                {isEditMode ?
-                    (<><input
-                        className='link__input'
-                        placeholder='URL'
-                        value={value}
-                        autoFocus
-                        onChange={(event) => setValue(event.target.value)}
-                    />
+                {isEditMode ? (
+                    <>
+                        <input
+                            className='image__input'
+                            placeholder='URL'
+                            value={value}
+                            autoFocus
+                            onChange={(event) => setValue(event.target.value)}
+                        />
                         <span
                             style={{
-                                marginLeft: '8px'
+                                marginLeft: '8px',
                             }}
-                            className='link__button'
+                            className='image__button'
                             onClick={(event) => handleAdd(event)}
                         >
                             add
                         </span>
                         <span
                             style={{
-                                marginLeft: '8px'
+                                marginLeft: '8px',
                             }}
-                            className='link__button' onClick={handleClose}>
+                            className='image__button'
+                            onClick={handleClose}
+                        >
                             X
                         </span>
-                    </>) :
-                    (<>
+                    </>
+                ) : (
+                    <>
                         <span
-                            className='link__button'
+                            className='image__button'
                             onClick={() => setIsEditMode(true)}
                         >
                             Edit link
                         </span>
                         <span
                             style={{
-                                marginLeft: '8px'
-                            }} className='link__button' onClick={handleDelete}>
-                            <DeleteIcon style={{
-                                fontSize: '18px'
-                            }} />
+                                marginLeft: '8px',
+                            }}
+                            className='image__button'
+                            onClick={handleDelete}
+                        >
+                            <DeleteIcon
+                                style={{
+                                    fontSize: '18px',
+                                }}
+                            />
                         </span>
-                    </>)}
+                    </>
+                )}
             </div>
         </PortalBody>
     );

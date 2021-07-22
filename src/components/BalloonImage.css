@@ -1,4 +1,4 @@
-.link__container {
+.image__container {
     position: absolute;
     max-width: 300px;
     min-width: max-content;
@@ -13,7 +13,7 @@
     margin-left: -20px;
     transition: top 75ms ease-out, left 75ms ease-out;
 }
-.link__input {
+.image__input {
     width: 240px;
     height: 24px;
     background: #f9f9f9;
@@ -22,10 +22,10 @@
     padding: 3px 8px;
     margin-right: 4px;
 }
-.link__input::placeholder {
+.image__input::placeholder {
     color: #a6a6a6;
 }
-.link__button {
+.image__button {
     color: #0053b8;
     height: 24px;
     display: flex;
@@ -34,10 +34,8 @@
     font-size: 12px;
     line-height: 18px;
     cursor: pointer;
-    margin-right: 8px;
-    font-weight: bold;
 }
-.link__label {
+.image__label {
     width: 240px;
     height: 24px;
     display: inline-block;
