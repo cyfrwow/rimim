@@ -9,15 +9,20 @@ import {
     createSlatePluginsOptions,
     deserializeHTMLToDocumentFragment,
     deserializeMD,
+    createDeserializeMDPlugin,
 } from '@udecode/slate-plugins';
 import Toolbar from './toolbar';
 import _plugins from './plugins';
 import TurndownService from 'turndown';
-import { gfm } from 'turndown-plugin-gfm';
+import { gfm } from './utils/turndown-plugin-gfm';
 import { ThematicBreakElement } from './hr/components/ThematicBreakElement';
 import { createThematicBreakPlugin } from './hr/createThematicBreakPlugin';
 import { ELEMENT_HR } from './hr/defaults';
 import { BalloonLink, BalloonImage } from './components';
+import { unified } from 'unified';
+import markdown from 'remark-parse';
+import slate from 'remark-slate';
+import remarkgfm from 'remark-gfm';
 import './Editor.css';
 
 const id = 'slate-plugins-editor';
@@ -37,7 +42,7 @@ const turndownService = new TurndownService({
     codeBlockStyle: 'fenced',
     emDelimiter: '*',
 })
-    .use([gfm])
+    .use(gfm)
     .addRule('strikethrough', {
         filter: ['del', 's', 'strike'],
         replacement: function (content) {
@@ -72,9 +77,7 @@ function Editor({
     const [markdownValue, setMarkdownValue] = useState(null);
 
     useEffect(() => {
-        console.log(inputFormat, initialValue);
         if (inputFormat === 'html') {
-            console.log('in html');
             setValue([
                 {
                     children: deserializeHTMLToDocumentFragment(editor, {
@@ -84,7 +87,18 @@ function Editor({
                 },
             ]);
         } else if (inputFormat === 'markdown') {
+            console.log(deserializeMD(editor, initialValue));
             setValue(deserializeMD(editor, initialValue));
+
+            // unified()
+            //     .use(markdown)
+            //     .use(remarkgfm)
+            //     .use(slate)
+            //     .process(initialValue, (err, slateObject) => {
+            //         if (err) throw err;
+            //         console.log(slateObject.result);
+            //         setValue(slateObject.result);
+            //     });
         } else if (inputFormat === 'slate') {
             setValue(initialValue);
         }
@@ -109,11 +123,15 @@ function Editor({
             onChange && onChange(htmlValue);
             return;
         }
+        console.log({ htmlValue });
         if (htmlValue) setMarkdownValue(turndownService.turndown(htmlValue));
     }, [htmlValue]);
 
     useEffect(() => {
-        if (markdownValue) onChange && onChange(markdownValue);
+        if (markdownValue) {
+            console.log({ markdownValue });
+            onChange && onChange(markdownValue);
+        }
     }, [markdownValue]);
 
     function handleOnChange(slateObject) {
@@ -137,7 +155,7 @@ function Editor({
                 plugins={plugins}
                 components={components}
                 options={options}
-                initialValue={initialValue}
+                value={value}
                 editableProps={editableProps}
                 onChange={(newValue) => handleOnChange(newValue)}
             ></SlatePlugins>

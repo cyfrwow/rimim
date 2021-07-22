@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useRef, useState, useEffect } from 'react';
-import { MdDelete as DeleteIcon, MdModeEdit as EditIcon } from 'react-icons/md'
+import { MdDelete as DeleteIcon, MdModeEdit as EditIcon } from 'react-icons/md';
 import {
     useStoreEditorState,
     useEventEditorId,
@@ -39,7 +39,7 @@ const BalloonLink = () => {
 
     useEffect(() => {
         // console.log(show, editor?.selection);
-        if (!editor || show || !editor.selection) {
+        if (!editor || !editor.selection) {
             return;
         }
         //to check if selection on editor is a link
@@ -52,7 +52,10 @@ const BalloonLink = () => {
                     type: ELEMENT_LINK,
                 },
             });
-        if (!active) return;
+        if (!active) {
+            handleClose();
+            return;
+        }
         if (active && !show) {
             //get parent of the selection
             const linkNode = getAbove(editor, {
@@ -90,7 +93,7 @@ const BalloonLink = () => {
             //show the link component
             setIsLinkOpen(true);
         }
-    }, [editor?.selection]);
+    });
 
     const handleClick = async (event) => {
         if (!editor) return;
@@ -135,6 +138,7 @@ const BalloonLink = () => {
                 {isEditMode ? (
                     <>
                         <input
+                            data-testid='link__input'
                             className='link__input'
                             placeholder='URL'
                             value={value}
@@ -142,12 +146,17 @@ const BalloonLink = () => {
                             onChange={(e) => setValue(e.target.value)}
                         />
                         <span
+                            data-testid='link__button-add'
                             className='link__button'
                             onClick={(e) => handleClick(e)}
                         >
                             add
                         </span>
-                        <span className='link__button' onClick={handleClose}>
+                        <span
+                            data-testid='link__button-close'
+                            className='link__button'
+                            onClick={handleClose}
+                        >
                             X
                         </span>
                     </>
@@ -162,17 +171,26 @@ const BalloonLink = () => {
                             {value}
                         </a>
                         <span
+                            data-testid='link__button-edit'
                             className='link__button'
                             onClick={() => setIsEditMode(true)}
                         >
-                            <EditIcon style={{
-                                fontSize: '18px'
-                            }} />
+                            <EditIcon
+                                style={{
+                                    fontSize: '18px',
+                                }}
+                            />
                         </span>
-                        <span className='link__button' onClick={removeLink}>
-                            <DeleteIcon style={{
-                                fontSize: '18px'
-                            }} />
+                        <span
+                            data-testid='link__button-delete'
+                            className='link__button'
+                            onClick={removeLink}
+                        >
+                            <DeleteIcon
+                                style={{
+                                    fontSize: '18px',
+                                }}
+                            />
                         </span>
                     </>
                 )}

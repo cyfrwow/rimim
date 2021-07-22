@@ -32,6 +32,7 @@ export const ToolbarLink = ({ getLinkUrl, ...props }) => {
     return (
         <ToolbarButton
             active={isLink}
+            className={'toolbar-link'}
             onMouseDown={async (event) => {
                 if (!editor) return;
                 event.preventDefault();

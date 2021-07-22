@@ -1,4 +1,4 @@
 import BalloonLink from './BalloonLink';
-import BalloonImage from './BaloonImage';
+import BalloonImage from './BalloonImage';
 
 export { BalloonLink, BalloonImage };

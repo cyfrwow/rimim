@@ -1,75 +1,73 @@
 * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  height: 100vh;
-  width: 100vw;
-  overflow-x: hidden;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+        'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
+        'Helvetica Neue', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    height: 100vh;
+    width: 100vw;
+    overflow-x: hidden;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+        monospace;
 }
 .container {
-  width: 100%;
-  display: flex;
-  overflow-x: hidden;
+    width: 100%;
+    display: flex;
+    overflow-x: hidden;
 }
 .column {
-  flex: 1;
-  margin-right: 10px;
-  height: 100vh;
-  max-height: 100vh;
-  padding: 10px;
-  position: relative;
-  border-right: 1px solid #ededed;
+    flex: 1;
+    margin-right: 10px;
+    height: 100vh;
+    max-height: 100vh;
+    padding: 10px;
+    position: relative;
+    border-right: 1px solid #ededed;
 }
 .textArea {
-  height: 100% !important;
-  width: 100% !important;
-  border: none;
+    height: 100% !important;
+    width: 100% !important;
+    border: none;
 }
 .toolbar {
-  display: flex;
-  width: 100%;
+    display: flex;
+    width: 100%;
 }
 .toolbar__list {
-  padding: 12px;
-  max-width: 100%;
-  overflow-x: auto;
-  list-style-type: none;
-  display: flex;
+    padding: 12px;
+    max-width: 100%;
+    overflow-x: auto;
+    list-style-type: none;
+    display: flex;
 }
 .toolbar__listitem {
-  display: flex;
+    display: flex;
 }
 .toolbar__button {
-  margin: 0 2px;
-  border-right: 1px solid #ededed;
+    margin: 0 2px;
+    border-right: 1px solid #ededed;
 }
 .slate-ToolbarButton-active {
-  background-color: #f2f2f2;
+    background-color: #f2f2f2;
 }
 .slate-HeadingToolbar {
-  position: absolute;
-  margin: 0;
-  width: 100%;
-  padding: 0;
+    position: absolute;
+    margin: 0;
+    width: 100%;
+    padding: 0;
 }
 .slate-HeadingToolbar ~ div {
-  position: absolute !important;
-  top: 50px;
-  left: 0;
-  text-align: left;
-  width: 100%;
-  padding: 15px;
+    text-align: left;
+    width: 100%;
+    margin-top: 50px;
+    padding: 15px;
 }

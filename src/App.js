@@ -13,15 +13,16 @@ const initialValue = [
 
 function App() {
     const handleChange = (value) => {
+        console.log(value);
     };
 
     return (
         <div className='App'>
             <Editor
-                initialValue={initialValue}
+                initialValue={'This is a paragraph'}
                 onChange={handleChange}
-                inputFormat={'slate'}
-                outputFormat={'slate'}
+                inputFormat={'markdown'}
+                outputFormat={'markdown'}
             />
         </div>
     );

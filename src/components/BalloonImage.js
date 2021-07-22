@@ -4,7 +4,10 @@ import {
     useStoreEditorState,
     useEventEditorId,
     PortalBody,
+    ELEMENT_IMAGE,
     insertImage,
+    getSlatePluginType,
+    insertNodes,
     setPositionAtSelection,
 } from '@udecode/slate-plugins';
 import cx from 'classnames';
@@ -22,6 +25,9 @@ const BalloonImage = () => {
     const isImageOpen = useEditorStore((state) => state.isImageOpen);
     const setIsImageOpen = useEditorStore((state) => state.setIsImageOpen);
     const editorSelection = useEditorStore((state) => state.editorSelection);
+    const editorSelectionText = useEditorStore(
+        (state) => state.editorSelectionText
+    );
     const setEditorSelection = useEditorStore(
         (state) => state.setEditorSelection
     );
@@ -62,7 +68,14 @@ const BalloonImage = () => {
         Transforms.select(editor, selection ?? editorSelection);
 
         //insert link at the location, using the saved new url
-        insertImage(editor, value);
+        // insertImage(editor, value);
+        const image = {
+            type: getSlatePluginType(editor, ELEMENT_IMAGE),
+            url: value,
+            caption: editorSelectionText,
+            children: [{ text: '' }],
+        };
+        insertNodes(editor, image);
 
         //close the link component
         setIsImageOpen(false);
