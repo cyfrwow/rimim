@@ -1,6 +1,7 @@
 .link__container {
     position: absolute;
-    width: 300px;
+    max-width: 300px;
+    min-width: max-content;
     height: 32px;
     display: none;
     box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
@@ -27,7 +28,6 @@
 .link__button {
     color: #0053b8;
     height: 24px;
-    width: 28px;
     display: flex;
     align-items: center;
     justify-content: center;
