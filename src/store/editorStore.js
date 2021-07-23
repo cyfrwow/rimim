@@ -2,9 +2,12 @@ import { createStore, setStoreValue } from './createStore';
 
 export const useEditorStore = createStore()((set) => ({
     isLinkOpen: false,
-    isImageOpen: false,
     setIsLinkOpen: setStoreValue(set, 'isLinkOpen', 'setIsLinkOpen'),
-    setIsImageOpen: setStoreValue(set, 'isImageOpen', 'setIsImageOpen'),
+
+    isImageBalloonOpen: false,
+    isImageBalloonEditModeOpen: false,
+    setIsImageBalloonOpen: setStoreValue(set, 'isImageBalloonOpen', 'setIsImageBalloonOpen'),
+    setIsImageBalloonEditModeOpen: setStoreValue(set, 'isImageBalloonEditModeOpen', 'setIsImageBalloonEditModeOpen'),
 
     editorSelection: null,
     setEditorSelection: setStoreValue(
