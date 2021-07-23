@@ -49,7 +49,6 @@ const BalloonLink = () => {
             },
         });
         if (!active && !isLinkOpen) {
-            console.log('not active', isLinkOpen);
             handleClose();
             return;
         }

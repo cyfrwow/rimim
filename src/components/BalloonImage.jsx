@@ -36,6 +36,8 @@ const BalloonImage = () => {
         (state) => state.setEditorSelectionText
     );
 
+    console.log(editorSelection);
+
     useEffect(
         () => {
             if(editor && editorSelection){
