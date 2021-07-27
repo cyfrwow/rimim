@@ -1,0 +1,29 @@
+.table__container {
+    position: absolute;
+    max-width: 300px;
+    min-width: max-content;
+    height: 32px;
+    display: none;
+    align-items: center;
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    background: #fff;
+    z-index: 500;
+    padding: 4px;
+    margin-top: 24px;
+    margin-left: -20px;
+    transition: top 75ms ease-out, left 75ms ease-out;
+}
+.show {
+    display: flex;
+}
+.table__container .slate-ToolbarButton {
+    border-radius: 4px;
+}
+.table__container .slate-ToolbarButton-active {
+    background-color: #fff;
+}
+
+.table__container .slate-ToolbarButton:hover {
+    background-color: #f2f2f2;
+}

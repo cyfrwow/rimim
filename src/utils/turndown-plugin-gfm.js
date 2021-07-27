@@ -1,5 +1,3 @@
-'use strict';
-
 Object.defineProperty(exports, '__esModule', { value: true });
 
 var highlightRegExp = /highlight-(?:text|source)-([a-z0-9]+)/;

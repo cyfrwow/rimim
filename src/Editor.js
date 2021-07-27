@@ -9,7 +9,6 @@ import {
     createSlatePluginsOptions,
     deserializeHTMLToDocumentFragment,
     deserializeMD,
-    createDeserializeMDPlugin,
 } from '@udecode/slate-plugins';
 import Toolbar from './toolbar';
 import _plugins from './plugins';
@@ -18,11 +17,11 @@ import { gfm } from './utils/turndown-plugin-gfm';
 import { ThematicBreakElement } from './hr/components/ThematicBreakElement';
 import { createThematicBreakPlugin } from './hr/createThematicBreakPlugin';
 import { ELEMENT_HR } from './hr/defaults';
-import { BalloonLink, BalloonImage } from './components';
-import { unified } from 'unified';
-import markdown from 'remark-parse';
-import slate from 'remark-slate';
-import remarkgfm from 'remark-gfm';
+import { BalloonLink, BalloonImage, BalloonTable } from './components';
+// import { unified } from 'unified';
+// import markdown from 'remark-parse';
+// import slate from 'remark-slate';
+// import remarkgfm from 'remark-gfm';
 import './Editor.css';
 
 const id = 'slate-plugins-editor';
@@ -87,7 +86,7 @@ function Editor({
                 },
             ]);
         } else if (inputFormat === 'markdown') {
-            console.log(deserializeMD(editor, initialValue));
+            // console.log(deserializeMD(editor, initialValue));
             setValue(deserializeMD(editor, initialValue));
 
             // unified()
@@ -123,13 +122,13 @@ function Editor({
             onChange && onChange(htmlValue);
             return;
         }
-        console.log({ htmlValue });
+        // console.log({ htmlValue });
         if (htmlValue) setMarkdownValue(turndownService.turndown(htmlValue));
     }, [htmlValue]);
 
     useEffect(() => {
         if (markdownValue) {
-            console.log({ markdownValue });
+            // console.log({ markdownValue });
             onChange && onChange(markdownValue);
         }
     }, [markdownValue]);
@@ -150,6 +149,7 @@ function Editor({
             </HeadingToolbar>
             <BalloonLink />
             <BalloonImage />
+            <BalloonTable />
             <SlatePlugins
                 id={id}
                 plugins={plugins}

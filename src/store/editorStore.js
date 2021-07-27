@@ -6,8 +6,19 @@ export const useEditorStore = createStore()((set) => ({
 
     isImageBalloonOpen: false,
     isImageBalloonEditModeOpen: false,
-    setIsImageBalloonOpen: setStoreValue(set, 'isImageBalloonOpen', 'setIsImageBalloonOpen'),
-    setIsImageBalloonEditModeOpen: setStoreValue(set, 'isImageBalloonEditModeOpen', 'setIsImageBalloonEditModeOpen'),
+    setIsImageBalloonOpen: setStoreValue(
+        set,
+        'isImageBalloonOpen',
+        'setIsImageBalloonOpen'
+    ),
+    setIsImageBalloonEditModeOpen: setStoreValue(
+        set,
+        'isImageBalloonEditModeOpen',
+        'setIsImageBalloonEditModeOpen'
+    ),
+
+    isTableBalloonOpen: false,
+    setIsTableOpen: setStoreValue(set, 'isTableOpen', 'setIsTableOpen'),
 
     editorSelection: null,
     setEditorSelection: setStoreValue(

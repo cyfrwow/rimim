@@ -20,6 +20,7 @@ import {
     ELEMENT_OL,
     ELEMENT_CODE_LINE,
     ELEMENT_DEFAULT,
+    ELEMENT_TABLE,
     isElement,
     isType,
     getParent,

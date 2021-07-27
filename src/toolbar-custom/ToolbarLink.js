@@ -34,7 +34,7 @@ export const ToolbarLink = ({ getLinkUrl, ...props }) => {
             active={isLink}
             className={'toolbar-link'}
             onMouseDown={async (event) => {
-                if (!editor) return;
+                if (!editor || !editor.selection) return;
                 event.preventDefault();
                 //toggle ballon link component
                 setIsLinkOpen(!isLinkOpen);

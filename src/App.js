@@ -1,19 +1,8 @@
 import Editor from './Editor';
 
-const initialValue = [
-    {
-        type: 'p',
-        children: [
-            {
-                text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur, eius. Omnis possimus quia maxime vero, sint iusto et illo accusamus!',
-            },
-        ],
-    },
-];
-
 function App() {
     const handleChange = (value) => {
-        console.log(value);
+        // console.log(value);
     };
 
     return (

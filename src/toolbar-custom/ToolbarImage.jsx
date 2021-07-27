@@ -3,14 +3,14 @@ import {
     useStoreEditorRef,
     useEventEditorId,
     ToolbarButton,
-    getSelectionText
+    getSelectionText,
 } from '@udecode/slate-plugins';
 import { useEditorStore } from '../store/editorStore';
 
 const ToolbarImage = ({ getImageUrl, ...props }) => {
     // Editor instance
     const editor = useStoreEditorRef(useEventEditorId('focus'));
-    
+
     // Editor GS
     const setEditorSelection = useEditorStore(
         (state) => state.setEditorSelection
@@ -20,14 +20,20 @@ const ToolbarImage = ({ getImageUrl, ...props }) => {
     );
 
     // Image balloon GS
-    const isImageBalloonOpen = useEditorStore((state) => state.isImageBalloonOpen);
-    const setIsImageBalloonOpen = useEditorStore((state) => state.setIsImageBalloonOpen);
-    const setIsImageBalloonEditModeOpen = useEditorStore((state) => state.setIsImageBalloonEditModeOpen);
+    const isImageBalloonOpen = useEditorStore(
+        (state) => state.isImageBalloonOpen
+    );
+    const setIsImageBalloonOpen = useEditorStore(
+        (state) => state.setIsImageBalloonOpen
+    );
+    const setIsImageBalloonEditModeOpen = useEditorStore(
+        (state) => state.setIsImageBalloonEditModeOpen
+    );
 
     return (
         <ToolbarButton
             onMouseDown={() => {
-                if (editor) {
+                if (editor && editor.selection) {
                     // set selection position in GS
                     setEditorSelection(editor.selection);
 

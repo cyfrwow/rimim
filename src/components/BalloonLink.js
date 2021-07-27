@@ -10,6 +10,7 @@ import {
     getAbove,
     upsertLinkAtSelection,
     getSelectionText,
+    insertNodes,
 } from '@udecode/slate-plugins';
 import cx from 'classnames';
 import { Transforms } from 'slate';
@@ -32,13 +33,31 @@ const BalloonLink = () => {
     );
 
     useEffect(() => {
-        // console.log(isLinkOpen, editorSelection);
         setShow((prevState) => isLinkOpen);
-        setPositionAtSelection(ref.current);
     }, [isLinkOpen]);
 
     useEffect(() => {
-        // console.log(show, editor?.selection);
+        if (editor && editorSelection && show) {
+            setPositionAtSelection(ref.current, 'bottom');
+            let left = ref.current.style.left;
+            left = parseInt(left.split('px')[0], 10);
+
+            if (left < 35) {
+                ref.current.style.setProperty('left', '35px');
+            }
+
+            const width = ref.current.offsetWidth;
+            const right = left + width;
+            if (right > window.innerWidth - 35) {
+                ref.current.style.setProperty(
+                    'left',
+                    `${window.innerWidth - 35 - width}px`
+                );
+            }
+        }
+    }, [show]);
+
+    useEffect(() => {
         if (!editor || !editor.selection) {
             return;
         }
@@ -96,11 +115,24 @@ const BalloonLink = () => {
         event.preventDefault();
         //select the previous selection which is lost when focusing on textbox
         Transforms.select(editor, selection ?? editorSelection);
-        //insert link at the location, using the saved new url
-        upsertLinkAtSelection(editor, {
-            url: value,
-            wrap: true,
-        });
+        console.log(getSelectionText(editor).length);
+        if (getSelectionText(editor).length === 0) {
+            insertNodes(editor, {
+                type: ELEMENT_LINK,
+                url: value,
+                children: [
+                    {
+                        text: value,
+                    },
+                ],
+            });
+        } else {
+            //insert link at the location, using the saved new url
+            upsertLinkAtSelection(editor, {
+                url: value,
+                wrap: true,
+            });
+        }
         handleClose();
         Transforms.move(editor, {
             distance: 1,

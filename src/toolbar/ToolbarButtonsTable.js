@@ -1,20 +1,59 @@
-import React from "react";
+import React from 'react';
+import { AiOutlineTable as TableIcon } from 'react-icons/ai';
 import {
-  ToolbarTable,
-  insertTable,
-  deleteTable,
-  addRow,
-  addColumn,
-  deleteRow,
-  deleteColumn,
-} from "@udecode/slate-plugins";
+    someNode,
+    getSlatePluginType,
+    ELEMENT_TABLE,
+    insertNodes,
+    getEmptyTableNode,
+} from '@udecode/slate-plugins';
+import { ToolbarTable } from '../toolbar-custom/ToolbarTable';
+
+import { Transforms } from 'slate';
+
+const insertTable = (editor, { header }) => {
+    if (
+        !someNode(editor, {
+            match: {
+                type: getSlatePluginType(editor, ELEMENT_TABLE),
+            },
+        })
+    ) {
+        insertNodes(
+            editor,
+            getEmptyTableNode(editor, {
+                header,
+            })
+        );
+        //to place the cursor on the first table cell
+        const currentPath = editor.selection.anchor.path;
+        const newPath = [currentPath[0], 0, 0, 0, 0];
+        Transforms.select(editor, {
+            anchor: {
+                path: newPath,
+                offset: 0,
+            },
+            focus: {
+                path: newPath,
+                offset: 0,
+            },
+        });
+    }
+};
 export const ToolbarButtonsTable = () => (
-  <>
-    <ToolbarTable icon={"+T"} transform={insertTable} />
-    <ToolbarTable icon={"-T"} transform={deleteTable} />
-    <ToolbarTable icon={"+R"} transform={addRow} />
-    <ToolbarTable icon={"-R"} transform={deleteRow} />
-    <ToolbarTable icon={"+C"} transform={addColumn} />
-    <ToolbarTable icon={"-C"} transform={deleteColumn} />
-  </>
+    <>
+        <ToolbarTable
+            icon={<TableIcon />}
+            transform={insertTable}
+            tooltip={{
+                content: 'Add table',
+                arrow: true,
+                delay: 0,
+                duration: [200, 0],
+                hideOnClick: true,
+                offset: [0, 17],
+                placement: 'bottom',
+            }}
+        />
+    </>
 );
