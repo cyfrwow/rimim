@@ -94,14 +94,11 @@ function BalloonTable() {
                     type: ELEMENT_TABLE,
                 },
             });
-            //get the url value of the link
+            //show the table component
             if (linkNode) {
-                console.log(editor.selection);
                 setSelection(editor.selection);
                 setShow(true);
-                // console.log(linkNode);
             }
-            //show the link component
         }
     });
 

@@ -68,7 +68,13 @@ const BalloonLink = () => {
             },
         });
         if (!active && !isLinkOpen) {
-            handleClose();
+            //close the link component
+            setIsLinkOpen(false);
+            //reset local state
+            setValue('');
+            setShow(false);
+            setSelection(null);
+            setIsEditMode(true);
             return;
         }
         if (active && !show) {
@@ -100,7 +106,7 @@ const BalloonLink = () => {
                     offset: editor.selection.anchor.offset,
                 },
             });
-            console.log('after select', editor.selection);
+            // console.log('after select', editor.selection);
             //save the selection
             setSelection(editor.selection);
             //move the ref component to the selection point
@@ -115,7 +121,7 @@ const BalloonLink = () => {
         event.preventDefault();
         //select the previous selection which is lost when focusing on textbox
         Transforms.select(editor, selection ?? editorSelection);
-        console.log(getSelectionText(editor).length);
+        // console.log(getSelectionText(editor).length);
         if (getSelectionText(editor).length === 0) {
             insertNodes(editor, {
                 type: ELEMENT_LINK,

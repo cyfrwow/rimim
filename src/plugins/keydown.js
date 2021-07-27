@@ -26,22 +26,22 @@ const useKeyDown = () => {
                 let activeType = null;
                 let activeMark = null;
                 switch (event.key) {
-                    case '1':
+                    case '0':
                         activeType = ELEMENT_H1;
                         break;
-                    case '2':
+                    case '1':
                         activeType = ELEMENT_H2;
                         break;
-                    case '3':
+                    case '2':
                         activeType = ELEMENT_H3;
                         break;
-                    case '4':
+                    case '3':
                         activeType = ELEMENT_H4;
                         break;
-                    case '5':
+                    case '4':
                         activeType = ELEMENT_H5;
                         break;
-                    case '6':
+                    case '5':
                         activeType = ELEMENT_H6;
                         break;
                     case '7':
