@@ -6,7 +6,6 @@ import {
     setPositionAtSelection,
     PortalBody,
     ToolbarTable,
-    insertTable,
     deleteTable,
     addRow,
     addColumn,

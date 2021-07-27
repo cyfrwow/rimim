@@ -2,13 +2,10 @@ import {
     ToolbarButton,
     ELEMENT_TABLE,
     someNode,
-    // insertTable,
     useStoreEditorState,
     useEventEditorId,
     getSlatePluginType,
     getPreventDefaultHandler,
-    insertNodes,
-    getEmptyTableNode,
 } from '@udecode/slate-plugins';
 
 export const ToolbarTable = ({ transform, header, ...props }) => {
