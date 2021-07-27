@@ -71,3 +71,21 @@ code {
     margin-top: 50px;
     padding: 15px;
 }
+.slate-table {
+    display: flex;
+    width: 100%;
+}
+tbody {
+    display: flex;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    flex-direction: column;
+}
+.slate-tr {
+    display: flex;
+    width: 100%;
+}
+.slate-td {
+    flex: 1;
+}
