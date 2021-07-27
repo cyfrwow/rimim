@@ -22,6 +22,7 @@ import { BalloonLink, BalloonImage, BalloonTable } from './components';
 // import markdown from 'remark-parse';
 // import slate from 'remark-slate';
 // import remarkgfm from 'remark-gfm';
+import useKeyDown from './plugins/keydown';
 import './Editor.css';
 
 const id = 'slate-plugins-editor';
@@ -61,8 +62,16 @@ function Editor({
     inputFormat = 'slate',
     outputFormat = 'slate',
 }) {
+    const handleKeyDown = useKeyDown();
+
     const plugins = useMemo(
-        () => [..._plugins, createThematicBreakPlugin()],
+        () => [
+            ..._plugins,
+            createThematicBreakPlugin(),
+            {
+                onKeyDown: handleKeyDown,
+            },
+        ],
         []
     );
 
