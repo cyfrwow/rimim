@@ -35,9 +35,11 @@ import {
     MARK_STRIKETHROUGH,
     MARK_CODE,
     KEYS_HEADING,
+    ELEMENT_TABLE,
 } from '@udecode/slate-plugins';
 import * as slatePluginsCommon from '@udecode/slate-plugins-common';
 import { ELEMENT_HR } from '../hr/defaults';
+import insertTable from '../utils/insertTable';
 
 const preFormat = (editor) => unwrapList(editor);
 
@@ -196,6 +198,13 @@ const optionsAutoformat = {
             type: ELEMENT_BLOCKQUOTE,
             markup: ['>'],
             preFormat,
+        },
+        {
+            type: ELEMENT_TABLE,
+            markup: ['||'],
+            format: (editor) => {
+                insertTable(editor);
+            },
         },
         {
             type: MARK_BOLD,
