@@ -89,3 +89,38 @@ tbody {
 .slate-td {
     flex: 1;
 }
+.slate-ol .slate-li {
+    list-style-type: decimal;
+}
+
+.slate-ol .slate-li .slate-ol .slate-li {
+    list-style-type: lower-alpha;
+}
+
+.slate-ol .slate-li .slate-ol .slate-li .slate-ol .slate-li {
+    list-style-type: lower-roman;
+}
+
+.slate-ol
+    .slate-li
+    .slate-ol
+    .slate-li
+    .slate-ol
+    .slate-li
+    .slate-ol
+    .slate-li {
+    list-style-type: lower-alpha;
+}
+
+.slate-ol
+    .slate-li
+    .slate-ol
+    .slate-li
+    .slate-ol
+    .slate-li
+    .slate-ol
+    .slate-li
+    .slate-ol
+    .slate-li {
+    list-style-type: lower-roman;
+}
