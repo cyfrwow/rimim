@@ -1,6 +1,6 @@
 import React from 'react';
 import { AiOutlineTable as TableIcon } from 'react-icons/ai';
-import insertTable from '../utils/insertTable';
+import insertTable from '../helpers/insertTable';
 import { ToolbarTable } from '../toolbar-custom/ToolbarTable';
 
 export const ToolbarButtonsTable = () => (

@@ -10,17 +10,36 @@ import {
     ELEMENT_H6,
     ELEMENT_UL,
     ELEMENT_OL,
-    insertEmptyCodeBlock,
-    MARK_STRIKETHROUGH,
-    toggleList,
-    MARK_CODE,
     ELEMENT_BLOCKQUOTE,
+    MARK_CODE,
+    toggleList,
+    insertEmptyCodeBlock,
 } from '@udecode/slate-plugins';
-import insertTable from '../utils/insertTable';
+import insertTable from '../helpers/insertTable';
 
 const useKeyDown = () => {
     return useCallback(
         (editor) => (event) => {
+            //Ctrl ⌘ + Alt ⌥  + ⇧
+            if (
+                (event.metaKey || event.ctrlKey) &&
+                event.altKey &&
+                event.shiftKey
+            ) {
+                event.preventDefault();
+                switch (event.keyCode) {
+                    case 77: //M - Code block
+                        insertEmptyCodeBlock(editor, {
+                            insertNodesOptions: {
+                                select: true,
+                            },
+                        });
+                        break;
+                    default:
+                        return;
+                }
+            }
+            //Ctrl ⌘ + ⇧
             if ((event.metaKey || event.ctrlKey) && event.shiftKey) {
                 event.preventDefault();
                 let activeType = null;
@@ -54,47 +73,26 @@ const useKeyDown = () => {
                             type: ELEMENT_UL,
                         });
                         return;
-                    case 'S':
-                        activeMark = MARK_STRIKETHROUGH;
-                        break;
-                    case 'M':
+                    case 'm':
                         activeMark = MARK_CODE;
                         break;
                     case '.':
                         activeType = ELEMENT_BLOCKQUOTE;
-                        return;
+                        break;
                     default:
                         return;
                 }
                 activeMark
-                    ? toggleMark(editor, {
-                          type: activeMark,
-                      })
+                    ? toggleMark(editor, activeMark)
                     : toggleNodeType(editor, {
                           activeType,
                       });
             }
-            if (
-                (event.metaKey || event.ctrlKey) &&
-                event.altKey &&
-                event.shiftKey
-            ) {
-                switch (event.code) {
-                    case 'KeyM':
-                        insertEmptyCodeBlock(editor, {
-                            insertNodesOptions: {
-                                select: true,
-                            },
-                        });
-                        return;
-                    default:
-                        return;
-                }
-            }
+            //Alt ⌥  + ⇧
             if (event.altKey && event.shiftKey) {
                 event.preventDefault();
                 switch (event.keyCode) {
-                    case 84:
+                    case 84: //T - Table
                         insertTable(editor, {
                             header: true,
                         });

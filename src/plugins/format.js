@@ -39,7 +39,7 @@ import {
 } from '@udecode/slate-plugins';
 import * as slatePluginsCommon from '@udecode/slate-plugins-common';
 import { ELEMENT_HR } from '../hr/defaults';
-import insertTable from '../utils/insertTable';
+import insertTable from '../helpers/insertTable';
 
 const preFormat = (editor) => unwrapList(editor);
 
