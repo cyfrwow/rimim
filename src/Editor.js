@@ -9,6 +9,7 @@ import {
     createSlatePluginsOptions,
     deserializeHTMLToDocumentFragment,
     deserializeMD,
+    createDeserializeHTMLPlugin
 } from '@udecode/slate-plugins';
 import Toolbar from './toolbar';
 import _plugins from './plugins';
@@ -68,6 +69,7 @@ function Editor({
         () => [
             ..._plugins,
             createThematicBreakPlugin(),
+            createDeserializeHTMLPlugin({plugins: _plugins}),
             {
                 onKeyDown: handleKeyDown,
             },

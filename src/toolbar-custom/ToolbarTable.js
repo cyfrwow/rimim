@@ -1,7 +1,6 @@
 import {
     ToolbarButton,
     ELEMENT_TABLE,
-    someNode,
     useStoreEditorState,
     useEventEditorId,
     getSlatePluginType,
@@ -12,17 +11,17 @@ export const ToolbarTable = ({ transform, header, ...props }) => {
     const editor = useStoreEditorState(useEventEditorId('focus'));
     const type = getSlatePluginType(editor, ELEMENT_TABLE);
 
-    const isTable =
-        !!(editor !== null && editor.selection) &&
-        someNode(editor, {
-            match: {
-                type,
-            },
-        });
+    // const isTable =
+    //     !!(editor !== null && editor.selection) &&
+    //     someNode(editor, {
+    //         match: {
+    //             type,
+    //         },
+    //     });
 
     return (
         <ToolbarButton
-            active={isTable}
+            // active={isTable}
             onMouseDown={
                 !!type && editor
                     ? getPreventDefaultHandler(transform, editor, {
