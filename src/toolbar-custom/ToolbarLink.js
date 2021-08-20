@@ -22,7 +22,7 @@ export const ToolbarLink = ({ getLinkUrl, ...props }) => {
     );
 
     const isLink =
-        !!(editor !== null && editor !== void 0 && editor.selection) &&
+        !!(editor !== null && editor.selection) &&
         someNode(editor, {
             match: {
                 type,

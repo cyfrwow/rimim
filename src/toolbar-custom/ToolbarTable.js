@@ -13,7 +13,7 @@ export const ToolbarTable = ({ transform, header, ...props }) => {
     const type = getSlatePluginType(editor, ELEMENT_TABLE);
 
     const isTable =
-        !!(editor !== null && editor !== void 0 && editor.selection) &&
+        !!(editor !== null && editor.selection) &&
         someNode(editor, {
             match: {
                 type,

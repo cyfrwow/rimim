@@ -12,7 +12,7 @@
     },
     "dependencies": {
         "@babel/polyfill": "^7.12.1",
-        "@udecode/slate-plugins": "^1.0.0-next.39",
+        "@udecode/slate-plugins": "^1.0.0-next.61",
         "classnames": "^2.3.1",
         "hotkeys-js": "^3.8.7",
         "ramda": "^0.27.1",
@@ -26,7 +26,7 @@
         "slate": "^0.63.0",
         "slate-history": "^0.62.0",
         "slate-hyperscript": "^0.62.0",
-        "slate-react": "^0.65.2",
+        "slate-react": "^0.62.1",
         "turndown": "^7.1.1",
         "turndown-plugin-gfm": "^1.0.2",
         "unified": "^10.0.1"
